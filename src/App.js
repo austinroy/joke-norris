@@ -17,7 +17,7 @@ class App extends Component {
         <Switch >
           <Route exact path="/" component={Categories} />
           <Route exact path="/jokes/:searchparam" component={Jokes} />
-          <Route exact path="/:category" component={SingleJoke} />
+          <Route exact path="/categories/:category" component={SingleJoke} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>

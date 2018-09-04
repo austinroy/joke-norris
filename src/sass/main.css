@@ -1,5 +1,17 @@
-@import "abstracts/*";
-@import "base/*";
-@import "components/*";
-@import "layout/*";
-@import "pages/*";
+body {
+  font-family: 'Lobster', cursive;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.7;
+  padding: 3rem;
+  box-sizing: border-box; }
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; }
+  .menu-item--search {
+    margin-left: auto; }
+    .menu-item--search .search--input {
+      border-radius: 30px; }
