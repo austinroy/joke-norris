@@ -1,0 +1,12 @@
+.main-container {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8));
+    background-size: cover;
+    height: 90vh;
+    overflow: auto;
+    padding: 2rem;
+    -webkit-clip-path: polygon(100% 0, 100% 85vh, 50% 100%, 0 85vh, 0 0);
+    clip-path: polygon(100% 0, 100% 85vh, 50% 100%, 0 85vh, 0 0);
+}

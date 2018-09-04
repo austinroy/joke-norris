@@ -7,4 +7,9 @@
 @import "base/typography";
 @import "base/utilities";
 
-@import "components/menu";
+@import "components/header";
+
+@import "layout/main";
+
+@import "pages/categories";
+@import "pages/singlejoke";

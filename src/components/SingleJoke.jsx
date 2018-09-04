@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import SearchBar from './SearchBar';
 import { connect } from 'react-redux';
 import * as jokeActions from '../redux/actions/jokeActions';
 import { bindActionCreators } from 'redux';
-import { Loader } from 'semantic-ui-react';
+import { 
+  Loader,
+  Segment,
+  Label,
+  Button,
+  Icon
+} from 'semantic-ui-react';
 
 class SingleJoke extends Component {
 	state = {
@@ -14,17 +19,29 @@ class SingleJoke extends Component {
     const category = this.props.match.params.category
     this.props.fetchJokes(category);
   }
+
+  refresh = () => {
+    window.location.reload();
+  }
 	
 	renderJoke = joke => {
     const category = this.props.match.params.category
     if (joke){
       return(
-        <div key={joke.id}>
-          <div>
-            <h1>{category}</h1>
-            <p>{joke.value}</p>
+        <Segment raised key={joke.id}>
+          <Label as='a' color='red' ribbon size='massive' style={{ textTransform : 'uppercase'}}>
+            {category}
+          </Label>
+          <div >
+            <div>
+              <p className='joke'>{joke.value}</p>
+            </div>
           </div>
-        </div>
+          <Button positive color='teal' icon labelPosition='right'onClick={this.refresh}>
+            Next
+            <Icon name='right arrow' />
+          </Button>
+        </Segment>
       )
     } else {
       return (
@@ -40,8 +57,7 @@ class SingleJoke extends Component {
 	render(){
 		const { joke, loading } = this.props;
 		return(
-			<div className="singlejoke">
-        <SearchBar />
+			<div>
 				{
           (loading ? this.renderLoader() : this.renderJoke(joke) )
         }
