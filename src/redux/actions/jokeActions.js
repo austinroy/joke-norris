@@ -1,5 +1,5 @@
-export const fetchCategories = () => dispatch => (
-    fetch('https://api.chucknorris.io/jokes/categories')
+export const fetchJokes = category => dispatch => (
+    fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
     .then(res => {
         if(!res.ok){
             Promise.reject.bind(Promise);
@@ -8,26 +8,25 @@ export const fetchCategories = () => dispatch => (
         }
     })
     .then(categories => {
-        return dispatch(fetchCategoriesSuccess(categories))
+        dispatch(fetchJokesSuccess(categories))
     })
     .catch(err => {
-        console.log(err)
-        return dispatch(fetchCategoriesFailure(err))
+        dispatch(fetchJokesSuccess(err))
     })
 )
 
-export const fetchCategoriesSuccess = (categories) => {
+export const fetchJokesSuccess = (joke) => {
     return {
-        type : 'FETCH_CATEGORIES_SUCCESS',
-        categories,
+        type : 'FETCH_JOKES_SUCCESS',
+        joke,
         loading : false,
         error : false,
     }
 }
 
-export const fetchCategoriesFailure = (err) => {
+export const fetchJokesFailure = (err) => {
     return {
-        type : 'FETCH_CATEGORIES_FAILURE',
+        type : 'FETCH_JOKES_FAILURE',
         loading : false,
         error : true,
         err

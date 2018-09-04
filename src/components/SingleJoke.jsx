@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import SearchBar from './SearchBar';
+import { connect } from 'react-redux';
+import * as jokeActions from '../redux/actions/jokeActions';
+import { bindActionCreators } from 'redux';
+import { Loader } from 'semantic-ui-react';
 
 class SingleJoke extends Component {
 	state = {
 		joke: {}
 	}
 
-  componentDidMount = () => {
-		const category = this.props.match.params.category;
-
-    axios.get(`https://api.chucknorris.io/jokes/random?category=${category}`)
-    .then(res =>{
-        if(res.status === 200) {
-            const joke = res.data;
-            this.setState({joke : joke})
-        }
-      }
-    )
-	}
+  componentDidMount(){
+    const category = this.props.match.params.category
+    this.props.fetchJokes(category);
+  }
 	
 	renderJoke = joke => {
     const category = this.props.match.params.category
@@ -37,16 +33,37 @@ class SingleJoke extends Component {
         </div>
       )
 		}
-	}
+  }
+  
+  renderLoader = () => <Loader active={this.props.loading} inline />
 
 	render(){
-		const { joke } = this.state;
+		const { joke, loading } = this.props;
 		return(
 			<div className="singlejoke">
-				{this.renderJoke(joke)}
+        <SearchBar />
+				{
+          (loading ? this.renderLoader() : this.renderJoke(joke) )
+        }
 			</div>
 		)
 	}
 }
 
-export default SingleJoke;
+SingleJoke.defaultProps ={
+  loading : true,
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    joke : state.joke.data,
+    loading : state.joke.loading,
+    error : state.joke.error,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(jokeActions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleJoke);

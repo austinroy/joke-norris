@@ -10,7 +10,7 @@ export default class SearchBar extends Component {
 
     return (
         <ul className="menu">
-          <li className="menu-item">
+          <li className="menu-item" href="/">
             <img src="https://assets.chucknorris.host/img/avatar/chuck-norris.png" alt="icon" className="icon"/>
           </li>
           <li className="menu-item">

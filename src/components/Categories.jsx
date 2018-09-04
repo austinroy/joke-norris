@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar';
-import axios from 'axios';
+import {connect} from 'react-redux';
+import * as categoryActions from '../redux/actions/categoryActions';
+import { bindActionCreators } from 'redux';
+import { Loader } from 'semantic-ui-react';
 
 class Categories extends Component {
-  state = {
-      categories : []
-  }
-  componentDidMount = () => {
-    axios.get('https://api.chucknorris.io/jokes/categories')
-    .then(res =>{
-        if(res.status === 200) {
-            const categories = res.data;
-            this.setState({categories : categories})
-        }
-      }
-    )
+  componentDidMount(){
+    this.props.fetchCategories();
   }
 
   renderCategory = (category, index) => {
@@ -41,20 +34,39 @@ class Categories extends Component {
       )
     }
   }
+
+  renderLoader = () => <Loader active={this.props.loading} inline />
   
   render () {
-    const {categories} = this.state;
+    const { categories, loading } = this.props;
     console.log(categories);
     return(
       <div>
         <SearchBar />
         <h3>Categories</h3>
         <div className="categories">
-          { this.mapCategories(categories)}
+          { 
+            (loading ? this.renderLoader() : this.mapCategories(categories) )
+          }
         </div>
       </div>
     )
   }
 }
+Categories.defaultProps ={
+  loading : true,
+}
 
-export default Categories;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    categories : state.categories.data,
+    loading : state.categories.loading,
+    error : state.categories.error,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(categoryActions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
