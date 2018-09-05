@@ -8,7 +8,7 @@ import {
   Header
 } from 'semantic-ui-react';
 
-class Categories extends React.Component{
+export class Categories extends React.Component{
 
   componentDidMount(){
     this.props.fetchCategories();

@@ -10,7 +10,7 @@ import {
   Icon
 } from 'semantic-ui-react';
 
-class SingleJoke extends Component {
+export class SingleJoke extends Component {
 	state = {
 		joke: {}
 	}
