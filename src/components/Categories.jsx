@@ -1,12 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as categoryActions from '../redux/actions/categoryActions';
 import { bindActionCreators } from 'redux';
 import { 
   Card, 
   Loader,
-  Header,
-  Menu
+  Header
 } from 'semantic-ui-react';
 
 class Categories extends React.Component{
@@ -25,12 +24,6 @@ class Categories extends React.Component{
           </Card.Content>
         </Card>
       </div>
-    )
-  }
-
-  renderMenu = () => {
-    return (
-      <Menu></Menu>
     )
   }
 
@@ -55,7 +48,7 @@ class Categories extends React.Component{
     return(
       <div className='u-center-text'>
         <Header size='medium' color='grey' >Categories</Header>
-        <p className="u-center-text">
+        <p className='u-center-text'>
           Chuck Norris demands you choose a category
         </p>
         <div className='categories'>
@@ -68,7 +61,7 @@ class Categories extends React.Component{
   }
 }
 
-Categories.defaultProps ={
+Categories.defaultProps = {
   loading : true,
 }
 

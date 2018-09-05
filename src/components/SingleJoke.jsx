@@ -37,6 +37,10 @@ class SingleJoke extends Component {
               <p className='joke'>{joke.value}</p>
             </div>
           </div>
+          <Button primary icon labelPosition='right' href='/'>
+            <Icon name='home' />
+            Choose Category
+          </Button>
           <Button positive color='teal' icon labelPosition='right'onClick={this.refresh}>
             Next
             <Icon name='right arrow' />

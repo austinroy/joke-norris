@@ -6,7 +6,6 @@ import {
   Switch 
 } from 'react-router-dom';
 import Categories from './components/Categories';
-import Jokes from './components/Jokes';
 import NotFound from './components/NotFound';
 import SingleJoke from './components/SingleJoke';
 import {Provider} from 'react-redux';
@@ -24,7 +23,6 @@ class App extends Component {
           <BrowserRouter>
             <Switch >
               <Route exact path="/" component={Categories} />
-              <Route exact path="/jokes/:searchparam" component={Jokes} />
               <Route exact path="/categories/:category" component={SingleJoke} />
               <Route component={NotFound} />
             </Switch>
