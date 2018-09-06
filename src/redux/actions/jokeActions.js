@@ -1,4 +1,4 @@
-export const fetchJokes = category => dispatch =>
+export const fetchJoke = category => dispatch =>
   fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
     .then(res => {
       if (!res.ok) {
@@ -8,24 +8,24 @@ export const fetchJokes = category => dispatch =>
       }
     })
     .then(categories => {
-      dispatch(fetchJokesSuccess(categories));
+      dispatch(fetchJokeSuccess(categories));
     })
     .catch(err => {
-      dispatch(fetchJokesSuccess(err));
+      dispatch(fetchJokeSuccess(err));
     });
 
-export const fetchJokesSuccess = joke => {
+export const fetchJokeSuccess = joke => {
   return {
-    type: 'FETCH_JOKES_SUCCESS',
+    type: 'FETCH_JOKE_SUCCESS',
     joke,
     loading: false,
     error: false
   };
 };
 
-export const fetchJokesFailure = err => {
+export const fetchJokeFailure = err => {
   return {
-    type: 'FETCH_JOKES_FAILURE',
+    type: 'FETCH_JOKE_FAILURE',
     loading: false,
     error: true,
     err

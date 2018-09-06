@@ -11,13 +11,9 @@ import {
 } from 'semantic-ui-react';
 
 export class SingleJoke extends Component {
-	state = {
-		joke: {}
-	}
-
   componentDidMount(){
     const category = this.props.match.params.category
-    this.props.fetchJokes(category);
+    this.props.fetchJoke(category);
   }
 
   refresh = () => {

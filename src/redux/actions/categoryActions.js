@@ -2,7 +2,7 @@ export const fetchCategories = () => dispatch =>
   fetch('https://api.chucknorris.io/jokes/categories')
     .then(res => {
       if (!res.ok) {
-        Promise.reject.bind(Promise);
+        return res.json().Promise.reject.bind(Promise);
       } else {
         return res.json();
       }

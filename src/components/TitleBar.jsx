@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Header, Image } from 'semantic-ui-react';
 import logo from '../logo.png'
 
-export default class TitleBar extends Component {
+export class TitleBar extends Component {
   handleSearch = () =>{
     return console.log("Searching");
   }
@@ -17,3 +17,5 @@ export default class TitleBar extends Component {
     )
   }
 }
+
+export default TitleBar;
