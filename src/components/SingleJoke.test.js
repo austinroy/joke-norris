@@ -1,13 +1,13 @@
-import { configure } from 'enzyme';
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { shallow, mount, render } from 'enzyme';
+import { render, cleanup } from '@testing-library/react';
 import { SingleJoke } from './SingleJoke';
 
-configure({ adapter: new Adapter() });
+afterEach(cleanup);
 
 const props = {
   fetchJoke: jest.fn(),
+  loading: false,
+  joke: 'Chuck Norris writes code that optimizes itself.',
   match: {
     params: {
       category: 'dev'
@@ -15,24 +15,22 @@ const props = {
   }
 };
 
-describe('SingleJoke Tests', () => {
-  it('renders the component without crashing', () => {
-    const wrapper = shallow(<SingleJoke {...props} />);
-  });
-  it('renders the joke', () => {
-    const wrapper = shallow(<SingleJoke {...props} />);
-    wrapper.find('joke');
-  });
-  it('renders the category ribbon', () => {
-    const wrapper = shallow(<SingleJoke {...props} />);
-    wrapper.find('ui.ribbon');
-  });
-  it('renders the next ribbon', () => {
-    const wrapper = shallow(<SingleJoke {...props} />);
-    wrapper.find('ui.button.positive.teal');
-  });
-  it('renders the next ribbon', () => {
-    const wrapper = shallow(<SingleJoke {...props} />);
-    wrapper.find('ui.button.primary.teal');
-  });
+const propsFailed = {
+  fetchJoke: jest.fn(),
+  loading: true,
+  match: {
+    params: {
+      category: 'dev'
+    }
+  }
+};
+
+test('renders the expected joke', () => {
+  const container = render(<SingleJoke {...props} />);
+  expect(container).toMatchSnapshot();
+});
+
+test('renders joke failure ui joke is not loaded', () => {
+  const container = render(<SingleJoke {...propsFailed} />);
+  expect(container).toMatchSnapshot();
 });

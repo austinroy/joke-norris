@@ -1,11 +1,6 @@
-import { configure } from 'enzyme';
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-// import { shallow, mount, render } from 'enzyme';
 import { Categories } from './Categories';
 import { render, cleanup } from '@testing-library/react';
-
-configure({ adapter: new Adapter() });
 
 const props = {
   fetchCategories: jest.fn(),
