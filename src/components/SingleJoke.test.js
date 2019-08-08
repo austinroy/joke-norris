@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import { SingleJoke } from './SingleJoke';
 
 afterEach(cleanup);
@@ -33,4 +34,11 @@ test('renders the expected joke', () => {
 test('renders joke failure ui joke is not loaded', () => {
   const container = render(<SingleJoke {...propsFailed} />);
   expect(container).toMatchSnapshot();
+});
+
+// Test Without Snapshot
+test('renders the next joke button', () => {
+  const container = render(<SingleJoke {...props} />);
+  const { getByText } = container;
+  expect(getByText('Next')).toBeInTheDocument()
 });

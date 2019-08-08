@@ -1,6 +1,7 @@
 import React from 'react';
 import { Categories } from './Categories';
 import { render, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 
 const props = {
   fetchCategories: jest.fn(),
@@ -40,4 +41,13 @@ test('renders category cards', () => {
 test('renders a loader', () => {
   const container = render(<Categories {...propsLoading} />);
   expect(container).toMatchSnapshot();
+});
+
+// Test Without Snapshot
+test('renders the titlebar text', () => {
+  const { getByText } = render(<Categories {...props} />);
+  expect(getByText('Categories')).toBeInTheDocument();
+  expect(
+    getByText('Chuck Norris demands you choose a category')
+  ).toBeInTheDocument();
 });
