@@ -1,6 +1,6 @@
 import React from 'react';
 import { Categories } from './Categories';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 const props = {
@@ -50,4 +50,6 @@ test('renders the titlebar text', () => {
   expect(
     getByText('Chuck Norris demands you choose a category')
   ).toBeInTheDocument();
+  fireEvent.click(getByText('dev'));
+  expect(props.fetchCategories).toHaveBeenCalled();
 });

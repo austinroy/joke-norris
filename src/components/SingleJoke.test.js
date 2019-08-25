@@ -40,5 +40,6 @@ test('renders joke failure ui joke is not loaded', () => {
 test('renders the next joke button', () => {
   const container = render(<SingleJoke {...props} />);
   const { getByText } = container;
-  expect(getByText('Next')).toBeInTheDocument()
+  expect(getByText('Next')).toBeInTheDocument();
+  expect(props.fetchJoke).toHaveBeenCalled();
 });
